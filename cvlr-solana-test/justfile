@@ -132,5 +132,9 @@ confs_justfile := "certora/confs/justfile"
 certora RULE: make_summaries
 	just -f {{ confs_justfile }} certora {{ RULE }}
 
+certora-conf CONF *OPTS: make_summaries
+	cd {{ parent_dir(CONF) }} && ${CERTORA_SOLANA_CLI} {{ file_name(CONF) }} {{ OPTS }}
+
+
 deep-clean: clean
 	just -f {{ confs_justfile }} clean
