@@ -1,0 +1,35 @@
+# user settings should be placed into .env file in some ancestor directory
+set dotenv-load
+
+# used by OSX, ignore otherwise
+export CPATH := env_var_or_default("CPATH", "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include")
+# magic llvm flags
+export RUSTFLAGS := "-C llvm-args=--sbf-expand-memcpy-in-order -C llvm-args=--combiner-store-merging=false -C llvm-args=--combiner-load-merging=false -C llvm-args=--aggressive-instcombine-max-scan-instrs=0 -C llvm-args=--combiner-reduce-load-op-store-width=false -C llvm-args=--combiner-shrink-load-replace-store-with-store=false -C strip=none -C debuginfo=2" + env("EXTRA_RUSTFLAGS", "")
+
+doc:
+	cargo doc --lib -F certora
+test *TESTS:
+	cargo test {{TESTS}} -- --nocapture
+test-certora *TESTS:
+	cargo test --features certora-test {{TESTS}} -- --nocapture
+
+build-sbf extra_features="":
+	echo "env RUSTFLAGS=$RUSTFLAGS"
+	cargo +solana build-sbf --features certora {{ extra_features }}
+
+build-sbf-llvm:
+	env RUSTFLAGS="${RUSTFLAGS} --emit=llvm-ir -C no-vectorize-slp -C opt-level=2" \
+	cargo +solana build-sbf --features certora
+
+build:
+	cargo build
+
+cargo-update:
+	cargo update -p cvt 
+
+clean:
+	rm -f *.dot *.png *.svg
+	rm -Rf emv-*
+	rm -Rf .certora_internal
+	rm -f log.txt
+	rm -rf certora_out

@@ -1,5 +1,5 @@
 project_root := canonicalize("..")
 crate_root := canonicalize(".")
-sbf_file := project_root / "target/sbf-solana-solana/release/cvlr_solana_test.so"
+sbf_file := project_root / "target/sbf-solana-solana/release/cvlr_test.so"
 
 import "../just/main.just"

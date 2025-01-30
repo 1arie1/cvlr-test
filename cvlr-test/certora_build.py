@@ -6,10 +6,10 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 # JSON FIELDS
 PROJECT_DIR = (SCRIPT_DIR / "..").resolve()
 SOURCES = [
-           "cvlr-solana-test/**/*.rs", 
-           "cvlr-solana-test/Cargo.toml"
+           "cvlr-test/**/*.rs", 
+           "cvlr-test/Cargo.toml"
            ]
-EXECUTABLES = "target/sbf-solana-solana/release/cvlr_solana_test.so"
+EXECUTABLES = "target/sbf-solana-solana/release/cvlr_test.so"
 
 INLINING = "cvlr-test/certora/cvlr_inlining.txt"
 SUMMARIES = "cvlr-test/certora/cvlr_summaries.txt"
