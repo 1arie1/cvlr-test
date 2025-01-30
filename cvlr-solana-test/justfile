@@ -1,0 +1,136 @@
+# user settings should be placed into .env file in some ancestor directory
+set dotenv-load
+
+# used by OSX, ignore otherwise
+export CPATH := env_var_or_default("CPATH", "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include")
+# magic llvm flags
+export RUSTFLAGS := "-C llvm-args=--sbf-expand-memcpy-in-order -C llvm-args=--combiner-store-merging=false -C llvm-args=--combiner-load-merging=false -C llvm-args=--aggressive-instcombine-max-scan-instrs=0 -C llvm-args=--combiner-reduce-load-op-store-width=false -C llvm-args=--combiner-shrink-load-replace-store-with-store=false -C strip=none -C debuginfo=2" + env("EXTRA_RUSTFLAGS", "")
+# java executable
+export JAVA := env_var_or_default("JAVA", "java")
+# certora endpoint
+export CERTORA_SOLANA_CLI := env_var_or_default("CERTORA_SOLANA_CLI", "certoraSolanaProver")
+
+# optimization level, 0 by default
+export TAC_OPT_LEVEL := env_var_or_default("TAC_OPT_LEVEL", "0")
+
+# type of cloud to use
+certora_cloud := "production"
+
+# cloud version of the prover (if remote is used)
+prover_version := "master"
+
+# location of prover jar
+emv_jar := "$CERTORA/emv.jar"
+
+# location of all local files
+
+project_root := canonicalize("..")
+certora_root := project_root / "certora"
+certora_summaries := certora_root / "summaries"
+core_inliner_cfg := certora_summaries  / "cvlr_inlining_core.txt"
+core_summaries_cfg := certora_summaries  / "cvlr_summaries_core.txt"
+
+crate_root := canonicalize(".")
+
+inliner_cfg := crate_root / "certora" / "cvlr_inlining.txt"
+summaries_cfg := crate_root / "certora" / "cvlr_summaries.txt"
+
+sbf_file := project_root / "target/sbf-solana-solana/release/cvlr_solana_test.so"
+
+doc:
+	cargo doc --lib -F certora
+test *TESTS:
+	cargo test {{TESTS}} -- --nocapture
+test-certora *TESTS:
+	cargo test --features certora-test {{TESTS}} -- --nocapture
+
+build-sbf extra_features="":
+	echo "env RUSTFLAGS=$RUSTFLAGS"
+	cargo +solana build-sbf --features certora {{ extra_features }}
+
+build-sbf-llvm:
+	env RUSTFLAGS="${RUSTFLAGS} --emit=llvm-ir -C no-vectorize-slp -C opt-level=2" \
+	cargo +solana build-sbf --features certora
+
+build:
+	cargo build
+
+cargo-update:
+	cargo update -p cvt 
+
+make_summaries:
+	cat {{ core_inliner_cfg }} > {{ inliner_cfg }}
+	cat {{ core_summaries_cfg }} > {{ summaries_cfg }}
+	
+# Usage: verify name_of_rule extra_options
+verify RULE *OPTS: build-sbf make_summaries
+		mkdir -p certora_out
+		cd certora_out && ${JAVA} -ea -Xmx8g \
+		-Dtopic.spec -Dlevel.ebpf=${CERTORA_VERBOSE:-info} \
+		-Dverbose.times -Dcvt.simple.parallel -Djava.awt.headless=true \
+		-jar {{ emv_jar }} \
+		-deleteSMTFile false -graphDrawLimit 2000 \
+		{{ sbf_file }} \
+		-unsatCoresForAllAsserts true \
+		-solanaInlining {{ inliner_cfg }} \
+		-solanaSummaries {{ summaries_cfg }} \
+		-solanaOptimisticJoin true \
+		-solanaOptimisticOverlaps true \
+		-solanaOptimisticMemcpyPromotion true \
+		-solanaOptimisticMemcmp true \
+		-solanaOptimisticNoMemmove true \
+		-solanaAggressiveGlobalDetection true \
+		-solanaSlicerIter 6 \
+		-solanaEnablePTAPseudoCanonicalize false \
+		-solanaRemoveCFGDiamonds true \
+		-solanaPrintDevMsg true \
+		-solanaSkipCallRegInst true \
+		-solanaPrintAnalyzedToDot \
+		-solanaTACOptimize ${TAC_OPT_LEVEL} \
+		-solanaStackSize 8192 \
+		-solanaEntrypoint {{ RULE }} \
+		{{ OPTS }} 
+
+# Usage: vacuity name_of_rule extra_options
+vacuity RULE *OPTS: (build-sbf "certora-vacuity") make_summaries
+		mkdir -p certora_out
+		cd certora_out && ${JAVA} -ea -Xmx8g \
+		-Dtopic.spec -Dlevel.ebpf=${CERTORA_VERBOSE:-info} \
+		-Dverbose.times -Dcvt.simple.parallel -Djava.awt.headless=true \
+		-jar {{ emv_jar }} \
+		-deleteSMTFile false -graphDrawLimit 2000 \
+		{{ sbf_file }} \
+		-solanaInlining {{ inliner_cfg }} \
+		-solanaSummaries {{ summaries_cfg }} \
+		-solanaOptimisticJoin true \
+		-solanaOptimisticOverlaps true \
+		-solanaOptimisticMemcpyPromotion true \
+		-solanaOptimisticMemcmp true \
+		-solanaOptimisticNoMemmove true \
+		-solanaAggressiveGlobalDetection true \
+		-solanaSlicerIter 6 \
+		-solanaEnablePTAPseudoCanonicalize false \
+		-solanaRemoveCFGDiamonds true \
+		-solanaPrintDevMsg true \
+		-solanaSkipCallRegInst true \
+		-solanaPrintAnalyzedToDot \
+		-solanaTACOptimize ${TAC_OPT_LEVEL} \
+		-solanaStackSize 8192 \
+		-solanaEntrypoint {{ RULE }} \
+		{{ OPTS }} 
+
+clean:
+	rm -f *.dot *.png *.svg
+	rm -Rf emv-*
+	rm -Rf .certora_internal
+	rm -f log.txt
+	rm -rf certora_out
+
+# recipes for running certoraSolanaProver
+confs_justfile := "certora/confs/justfile"
+
+certora RULE: make_summaries
+	just -f {{ confs_justfile }} certora {{ RULE }}
+
+deep-clean: clean
+	just -f {{ confs_justfile }} clean

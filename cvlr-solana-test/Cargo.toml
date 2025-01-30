@@ -1,0 +1,22 @@
+[package]
+name = "cvlr-solana-test"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+name = "cvlr_solana_test"
+
+[features]
+certora = []
+certora-vacuity = []
+certora-test = []
+
+
+[dependencies]
+solana-program = "1.18"
+spl-token = "4"
+spl-token-2022 = "3"
+
+cvlr = { workspace = true }
+cvlr-solana = { workspace = true }

@@ -1,0 +1,8 @@
+{
+    "cSpell.words": [
+        "RUSTFLAGS"
+    ],
+    "rust-analyzer.cargo.features": [
+        "certora"
+    ]
+}

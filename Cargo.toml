@@ -1,0 +1,27 @@
+[workspace]
+resolver = "2"
+members = [
+    "cvlr-test",
+    "cvlr-solana-test",
+]
+
+[workspace.package]
+version = "0.1.0"
+authors = ["Certora"]
+description = "Tests for Certora Verification Language for Rust"
+documentation = "https://certora.com"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+overflow-checks = true
+
+
+[workspace.dependencies]
+proc-macro2 = "1"
+quote = "1"
+syn = "2"
+
+cvlr = { path = "../solana-cvt/cvt", package = "cvt"}
+cvlr-solana = { path = "../solana-cvt/solana_cvt", package = "solana_cvt"}
+
