@@ -37,6 +37,7 @@ verify RULE *OPTS: build-sbf make_summaries
 		-solanaPrintDevMsg true \
 		-solanaSkipCallRegInst true \
 		-solanaPrintAnalyzedToDot \
+		-solanaTACMathInt true \
 		-solanaTACOptimize ${TAC_OPT_LEVEL} \
 		-solanaStackSize 8192 \
 		-solanaEntrypoint {{ RULE }} \
