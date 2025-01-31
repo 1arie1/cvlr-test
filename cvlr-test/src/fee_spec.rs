@@ -2,7 +2,7 @@
 use cvlr::prelude::*;
 
 /// Function under verification
-pub fn compute_fee(amount: u64, fee_bps: u16) -> Result<u64,()> {
+fn compute_fee(amount: u64, fee_bps: u16) -> Result<u64,()> {
     if amount > 0 {
         Ok(amount
             .checked_mul(fee_bps as u64)
@@ -39,8 +39,8 @@ pub fn rule_fee_liveness() {
     cvlr_assume!(fee_bps <= 10_000);
     let fee = compute_fee(amt, fee_bps);
     clog!(amt, fee_bps, fee);
-    if fee.is_ok() {
+    if fee.is_err() {
         cvlr_assert!(amt == 0);
     }
-    cvlr_assert!(false);
+    cvlr_vacuity_check!();
 }
