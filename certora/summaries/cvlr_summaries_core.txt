@@ -17,30 +17,11 @@
 #[type((*i64)(r1+0):ptr_heap)]
 ^alloc::raw_vec::RawVec<T,A>::reserve::do_reserve_and_handle(_[0-9][0-9]*)*$
 
-#[type((*i64)(r1+0):num)]
-#[type((*i64)(r1+8):num)]
-^__multi3$
-
-#[type((*i64)(r1+0):num)]
-#[type((*i64)(r1+8):num)]
-^__udivti3$
-
-#[type((*i64)(r1+0):num)]
-#[type((*i64)(r1+8):num)]
-^__divti3$
-
 #[type(r0:num)]
 ^__muldf3$
 
 #[type(r0:num)]
 ^__divdf3$
-
-#[type((*i64)(r1+0):num)]
-#[type((*i64)(r1+8):num)]
-#[type((*i64)(r1+16):num)]
-#[type((*i64)(r1+24):num)]
-#[type((*i64)(r1+32):num)]
-^sol_get_clock_sysvar$
 
 ;; %"AccountInfo" = type { %"Pubkey"*, i64*, i64*, %"Pubkey"*, i64, i8, i8, i8, [5 x i8] }
 #[type((*i64)(r1+0):ptr_external)]
