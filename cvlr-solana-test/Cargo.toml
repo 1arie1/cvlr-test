@@ -9,7 +9,7 @@ name = "cvlr_solana_test"
 
 [features]
 certora = []
-certora-vacuity = []
+certora-vacuity = ["cvlr/vacuity"]
 certora-test = []
 
 
