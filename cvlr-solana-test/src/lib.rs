@@ -1,5 +1,7 @@
 use cvlr::{rule, nondet, clog, asserts::*};
 
+mod accounts;
+
 #[rule]
 pub fn test_satisfy() {
     let x: u64 = nondet();
