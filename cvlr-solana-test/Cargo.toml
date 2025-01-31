@@ -15,8 +15,8 @@ certora-test = []
 
 [dependencies]
 solana-program = "1.18"
-spl-token = "4"
-spl-token-2022 = "3"
+spl-token = { version = "4", features = ["no-entrypoint"] }
+spl-token-2022 = { version = "3", features = ["no-entrypoint"] }
 
 cvlr = { workspace = true }
 cvlr-solana = { workspace = true }
