@@ -15,9 +15,6 @@ fn compute_fee(amount: u64, fee_bps: u16) -> Result<u64,()> {
     }
 }
 
-
-
-
 #[rule]
 pub fn rule_fee_sanity_ok() {
     compute_fee(nondet(), nondet()).unwrap();

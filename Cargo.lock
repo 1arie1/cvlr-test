@@ -1878,6 +1878,7 @@ name = "solana_cvt"
 version = "0.2.0"
 dependencies = [
  "arrayref",
+ "calltrace",
  "cvlr-asserts",
  "mathint",
  "nondet",
