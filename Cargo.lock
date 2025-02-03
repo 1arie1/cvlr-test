@@ -468,13 +468,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
-name = "calltrace"
-version = "0.2.0"
-dependencies = [
- "mathint",
-]
-
-[[package]]
 name = "cc"
 version = "1.2.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -625,16 +618,90 @@ dependencies = [
 ]
 
 [[package]]
+name = "cvlr"
+version = "0.2.0"
+dependencies = [
+ "cvlr-asserts",
+ "cvlr-early-panic",
+ "cvlr-hook",
+ "cvlr-log",
+ "cvlr-macros",
+ "cvlr-mathint",
+ "cvlr-nondet",
+]
+
+[[package]]
 name = "cvlr-asserts"
 version = "0.2.0"
+
+[[package]]
+name = "cvlr-early-panic"
+version = "0.2.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.96",
+]
+
+[[package]]
+name = "cvlr-hook"
+version = "0.2.0"
+dependencies = [
+ "quote",
+ "syn 2.0.96",
+]
+
+[[package]]
+name = "cvlr-log"
+version = "0.2.0"
+dependencies = [
+ "cvlr-mathint",
+]
+
+[[package]]
+name = "cvlr-macros"
+version = "0.2.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.96",
+]
+
+[[package]]
+name = "cvlr-mathint"
+version = "0.2.0"
+dependencies = [
+ "cvlr-nondet",
+]
+
+[[package]]
+name = "cvlr-nondet"
+version = "0.2.0"
+dependencies = [
+ "cvlr-asserts",
+]
+
+[[package]]
+name = "cvlr-solana"
+version = "0.2.0"
+dependencies = [
+ "arrayref",
+ "cvlr-asserts",
+ "cvlr-log",
+ "cvlr-mathint",
+ "cvlr-nondet",
+ "solana-program",
+ "spl-token",
+ "spl-token-2022",
+]
 
 [[package]]
 name = "cvlr-solana-test"
 version = "0.1.0"
 dependencies = [
- "cvt",
+ "cvlr",
+ "cvlr-solana",
  "solana-program",
- "solana_cvt",
  "spl-token",
  "spl-token-2022",
 ]
@@ -643,29 +710,7 @@ dependencies = [
 name = "cvlr-test"
 version = "0.1.0"
 dependencies = [
- "cvt",
-]
-
-[[package]]
-name = "cvt"
-version = "0.2.0"
-dependencies = [
- "calltrace",
- "cvlr-asserts",
- "cvt-macros",
- "early-panic",
- "hook-macro",
- "mathint",
- "nondet",
-]
-
-[[package]]
-name = "cvt-macros"
-version = "0.2.0"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.96",
+ "cvlr",
 ]
 
 [[package]]
@@ -738,15 +783,6 @@ dependencies = [
  "block-buffer 0.10.4",
  "crypto-common",
  "subtle",
-]
-
-[[package]]
-name = "early-panic"
-version = "0.2.0"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.96",
 ]
 
 [[package]]
@@ -922,14 +958,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "hook-macro"
-version = "0.2.0"
-dependencies = [
- "quote",
- "syn 2.0.96",
-]
-
-[[package]]
 name = "humantime"
 version = "2.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1099,13 +1127,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "04cbf5b083de1c7e0222a7a51dbfdba1cbe1c6ab0b15e29fff3f6c077fd9cd9f"
 
 [[package]]
-name = "mathint"
-version = "0.2.0"
-dependencies = [
- "nondet",
-]
-
-[[package]]
 name = "memchr"
 version = "2.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1139,13 +1160,6 @@ dependencies = [
  "keccak",
  "rand_core 0.6.4",
  "zeroize",
-]
-
-[[package]]
-name = "nondet"
-version = "0.2.0"
-dependencies = [
- "cvlr-asserts",
 ]
 
 [[package]]
@@ -1874,20 +1888,6 @@ dependencies = [
  "subtle",
  "thiserror",
  "zeroize",
-]
-
-[[package]]
-name = "solana_cvt"
-version = "0.2.0"
-dependencies = [
- "arrayref",
- "calltrace",
- "cvlr-asserts",
- "mathint",
- "nondet",
- "solana-program",
- "spl-token",
- "spl-token-2022",
 ]
 
 [[package]]

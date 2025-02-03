@@ -22,6 +22,6 @@ proc-macro2 = "1"
 quote = "1"
 syn = "2"
 
-cvlr = { path = "../solana-cvt/cvt", package = "cvt"}
-cvlr-solana = { path = "../solana-cvt/solana_cvt", package = "solana_cvt"}
+cvlr = { path = "../solana-cvt/cvlr" }
+cvlr-solana = { path = "../solana-cvt/cvlr-solana" }
 
