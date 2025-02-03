@@ -116,7 +116,7 @@ mod fv {
             let new = self;
             cvlr_assert_eq!(
                 old.token_total * new.shares_total,
-                new.token_total * old.shares_total 
+                new.token_total * old.shares_total
             );
         }
 
@@ -124,10 +124,9 @@ mod fv {
             let new = self;
             cvlr_assert_le!(
                 old.token_total * new.shares_total,
-                new.token_total * old.shares_total 
+                new.token_total * old.shares_total
             );
         }
- 
     }
 
     impl From<&VaultState> for FvVaultState {
@@ -147,9 +146,10 @@ mod fv {
 
     impl cvlr::log::CvlrLog for FvVaultState {
         fn log(&self, tag: &str, logger: &mut cvlr::log::CvlrLogger) {
-           logger.log(tag);
-           cvlr::log::cvlr_log_("  token_total", &self.token_total, logger);
-           cvlr::log::cvlr_log_("  shares_total", &self.shares_total, logger);
+            use cvlr::log::cvlr_log_with;
+            cvlr_log_with("", &tag, logger);
+            cvlr_log_with("\ttoken_total", &self.token_total, logger);
+            cvlr_log_with("\tshares_total", &self.shares_total, logger);
         }
     }
 
@@ -182,7 +182,7 @@ mod fv {
         let token_arg: u64 = nondet();
         let _ = vault.deposit(token_arg);
         clog!(stringify!(vault.deposit(token_arg);));
-        
+
         let fv_vault_post: FvVaultState = (&vault).into();
 
         clog!(fv_vault_pre, token_arg, fv_vault_post);
@@ -219,7 +219,7 @@ mod fv {
 
         let token_arg: u64 = nondet();
         let _ = vault.slash(token_arg);
-        
+
         clog!(stringify!(vault.slash(token_arg);));
 
         let fv_vault_post: FvVaultState = (&vault).into();
@@ -230,13 +230,12 @@ mod fv {
         cvlr_vacuity_check!();
     }
 
-
     #[rule]
     pub fn rule_vault_no_dilution_withdraw() {
         let mut vault: VaultState = nondet();
 
         let fv_vault_pre: FvVaultState = (&vault).into();
-        
+
         let shares_arg: u64 = nondet();
         let out = vault.withdraw(shares_arg);
         clog!(stringify!(vault.withdraw(shares_arg)));
@@ -255,7 +254,7 @@ mod fv {
         let mut vault: VaultState = nondet();
 
         let fv_vault_pre: FvVaultState = (&vault).into();
-        
+
         let token_arg: u64 = nondet();
         let out = vault.deposit(token_arg);
         clog!(stringify!(vault.deposit(token_arg)));
@@ -274,7 +273,7 @@ mod fv {
         let mut vault: VaultState = nondet();
 
         let fv_vault_pre: FvVaultState = (&vault).into();
-        
+
         let token_arg: u64 = nondet();
         let out = vault.reward(token_arg);
         clog!(stringify!(vault.reward(token_arg)));
@@ -293,7 +292,7 @@ mod fv {
         let mut vault: VaultState = nondet();
 
         let fv_vault_pre: FvVaultState = (&vault).into();
-        
+
         let token_arg: u64 = nondet();
         let out = vault.slash(token_arg);
         clog!(stringify!(vault.reward(token_arg)));
