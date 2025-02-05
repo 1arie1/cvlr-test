@@ -11,6 +11,7 @@ name = "cvlr_test"
 certora = []
 certora-vacuity = ["cvlr/vacuity"]
 certora-test = []
+rt = ["cvlr/rt"]
 
 [dependencies]
 cvlr = { workspace = true }

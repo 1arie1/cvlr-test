@@ -22,6 +22,6 @@ proc-macro2 = "1"
 quote = "1"
 syn = "2"
 
-cvlr = { path = "../solana-cvt/cvlr" }
-cvlr-solana = { path = "../solana-cvt/cvlr-solana" }
+cvlr = { git = "https://github.com/1arie1/cvlr.git" }
+cvlr-solana = { git = "https://github.com/1arie1/cvlr-solana.git" }
 

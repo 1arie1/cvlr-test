@@ -11,6 +11,7 @@ name = "cvlr_solana_test"
 certora = []
 certora-vacuity = ["cvlr/vacuity"]
 certora-test = []
+rt = ["cvlr/rt", "cvlr-solana/rt"]
 
 
 [dependencies]
