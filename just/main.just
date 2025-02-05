@@ -1,3 +1,3 @@
-import "../just/build.just"
-import "../just/certoraSolanaProver.just"
-import? "../just/certoraDevVerify.just"
+import "build.just"
+import "certoraSolanaProver.just"
+import? "certoraDevVerify.just"
