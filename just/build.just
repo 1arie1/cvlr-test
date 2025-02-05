@@ -24,8 +24,9 @@ build-sbf-llvm:
 build:
 	cargo build
 
-cargo-update:
-	cargo update -p cvt 
+cvlr-update:
+	cargo update -p cvlr
+	cargo update -p cvlr-solana	
 
 clean:
 	rm -f *.dot *.png *.svg
