@@ -26,9 +26,9 @@ pub fn rule_fee_assessed() {
     cvlr_assume!(fee_bps <= 10_000);
     let fee = compute_fee(amt, fee_bps).unwrap();
     clog!(amt, fee_bps, fee);
-    cvlr_assert!(fee <= amt);
+    cvlr_assert_le!(fee, amt);
     if fee_bps > 0 {
-        cvlr_assert!(fee > 0);
+        cvlr_assert_gt!(fee, 0);
     }
 }
 
