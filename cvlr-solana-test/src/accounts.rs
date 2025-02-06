@@ -15,8 +15,8 @@ pub fn clone_accounts() {
     let lamports1 = acc1.lamports();
     let lamports0_ = acc0_.lamports();
 
-    cvlr_assert!(lamports0_ == lamports0);
-    cvlr_assert!(lamports0 == lamports1);
+    cvlr_assert_eq!(lamports0_, lamports0);
+    cvlr_assert_eq!(lamports0, lamports1);
 }
 
 #[rule]
@@ -31,7 +31,7 @@ pub fn init_accounts() {
     cvlr_assume!(acc0.data_len() == 0);
     cvlr_assert!(acc0.data_is_empty());
     acc0.realloc(1024, false).unwrap();
-    cvlr_assert!(acc0.data_len() > 0);
+    cvlr_assert_gt!(acc0.data_len(), 0);
     cvlr_assert_eq!(acc0.data_len(), 1024);
 
     acc0.realloc(2*1024, true).unwrap();
