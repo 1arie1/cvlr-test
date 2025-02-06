@@ -18,7 +18,7 @@ SUMMARIES = "cvlr-test/certora/cvlr_summaries.txt"
 # There is probably no need to change the file past this point
 
 # Command to run for compiling the rust project.
-COMMAND = "just build-sbf"
+COMMAND = "just make-certora-sbf-env build-sbf"
 
 import argparse
 import json
