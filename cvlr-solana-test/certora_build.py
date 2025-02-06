@@ -6,6 +6,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 # JSON FIELDS
 PROJECT_DIR = (SCRIPT_DIR / "..").resolve()
 SOURCES = [
+           "Cargo.toml",
            "cvlr-solana-test/**/*.rs", 
            "cvlr-solana-test/Cargo.toml"
            ]
