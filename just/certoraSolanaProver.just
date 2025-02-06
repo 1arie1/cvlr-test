@@ -19,14 +19,14 @@ summaries_cfg := crate_root / "certora" / "cvlr_summaries.txt"
 # recipes for running certoraSolanaProver
 confs_justfile := crate_root / "certora/confs/justfile"
 
-make_summaries:
+make-certora-sbf-env:
 	cat {{ core_inliner_cfg }} > {{ inliner_cfg }}
 	cat {{ core_summaries_cfg }} > {{ summaries_cfg }}
 	
-certora RULE: make_summaries
+certora RULE: make-certora-sbf-env
 	just -f {{ confs_justfile }} certora {{ RULE }}
 
-certora-conf CONF *OPTS: make_summaries
+certora-conf CONF *OPTS: make-certora-sbf-env
 	cd {{ parent_dir(CONF) }} && ${CERTORA_SOLANA_CLI} {{ file_name(CONF) }} {{ OPTS }}
 
 

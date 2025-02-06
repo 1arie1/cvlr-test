@@ -14,7 +14,7 @@ export TAC_OPT_LEVEL := env_var_or_default("TAC_OPT_LEVEL", "0")
 emv_jar := "$CERTORA/emv.jar"
 
 # Usage: verify name_of_rule extra_options
-verify RULE *OPTS: build-sbf make_summaries
+verify RULE *OPTS: build-sbf make-certora-sbf-env
 		mkdir -p certora_out
 		cd certora_out && ${JAVA} -ea -Xmx8g \
 		-Dtopic.spec -Dlevel.ebpf=${CERTORA_VERBOSE:-info} \
@@ -44,7 +44,7 @@ verify RULE *OPTS: build-sbf make_summaries
 		{{ OPTS }} 
 
 # Usage: vacuity name_of_rule extra_options
-vacuity RULE *OPTS: (build-sbf "certora-vacuity") make_summaries
+vacuity RULE *OPTS: (build-sbf "certora-vacuity") make-certora-sbf-env
 		mkdir -p certora_out
 		cd certora_out && ${JAVA} -ea -Xmx8g \
 		-Dtopic.spec -Dlevel.ebpf=${CERTORA_VERBOSE:-info} \
