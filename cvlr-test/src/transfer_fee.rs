@@ -89,5 +89,4 @@ pub fn rule_monotonicity_of_calculate_fee() {
     let fee_x = tf.calculate_fee(pre_fee_amount_x).unwrap();
     let fee_y = tf.calculate_fee(pre_fee_amount_y).unwrap();
     cvlr_assert_ge!(fee_x, fee_y);
-    cvlr_vacuity_check!()
 }

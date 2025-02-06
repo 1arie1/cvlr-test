@@ -620,26 +620,28 @@ dependencies = [
 [[package]]
 name = "cvlr"
 version = "0.3.0"
-source = "git+https://github.com/1arie1/cvlr.git#d516e5fece8d17bb7a07068df648ce796c1d7c88"
 dependencies = [
- "cvlr-asserts",
+ "cvlr-asserts 0.3.0",
  "cvlr-early-panic",
  "cvlr-hook",
- "cvlr-log",
+ "cvlr-log 0.3.0",
  "cvlr-macros",
- "cvlr-mathint",
- "cvlr-nondet",
+ "cvlr-mathint 0.3.0",
+ "cvlr-nondet 0.3.0",
 ]
 
 [[package]]
 name = "cvlr-asserts"
 version = "0.3.0"
-source = "git+https://github.com/1arie1/cvlr.git#d516e5fece8d17bb7a07068df648ce796c1d7c88"
+
+[[package]]
+name = "cvlr-asserts"
+version = "0.3.0"
+source = "git+https://github.com/1arie1/cvlr.git#3dc633a2477e58bf2b3e47e82b99b549bc4e0ce8"
 
 [[package]]
 name = "cvlr-early-panic"
 version = "0.3.0"
-source = "git+https://github.com/1arie1/cvlr.git#d516e5fece8d17bb7a07068df648ce796c1d7c88"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -649,7 +651,6 @@ dependencies = [
 [[package]]
 name = "cvlr-hook"
 version = "0.3.0"
-source = "git+https://github.com/1arie1/cvlr.git#d516e5fece8d17bb7a07068df648ce796c1d7c88"
 dependencies = [
  "quote",
  "syn 2.0.96",
@@ -658,15 +659,21 @@ dependencies = [
 [[package]]
 name = "cvlr-log"
 version = "0.3.0"
-source = "git+https://github.com/1arie1/cvlr.git#d516e5fece8d17bb7a07068df648ce796c1d7c88"
 dependencies = [
- "cvlr-mathint",
+ "cvlr-mathint 0.3.0",
+]
+
+[[package]]
+name = "cvlr-log"
+version = "0.3.0"
+source = "git+https://github.com/1arie1/cvlr.git#3dc633a2477e58bf2b3e47e82b99b549bc4e0ce8"
+dependencies = [
+ "cvlr-mathint 0.3.0 (git+https://github.com/1arie1/cvlr.git)",
 ]
 
 [[package]]
 name = "cvlr-macros"
 version = "0.3.0"
-source = "git+https://github.com/1arie1/cvlr.git#d516e5fece8d17bb7a07068df648ce796c1d7c88"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -676,29 +683,42 @@ dependencies = [
 [[package]]
 name = "cvlr-mathint"
 version = "0.3.0"
-source = "git+https://github.com/1arie1/cvlr.git#d516e5fece8d17bb7a07068df648ce796c1d7c88"
 dependencies = [
- "cvlr-nondet",
+ "cvlr-nondet 0.3.0",
+]
+
+[[package]]
+name = "cvlr-mathint"
+version = "0.3.0"
+source = "git+https://github.com/1arie1/cvlr.git#3dc633a2477e58bf2b3e47e82b99b549bc4e0ce8"
+dependencies = [
+ "cvlr-nondet 0.3.0 (git+https://github.com/1arie1/cvlr.git)",
 ]
 
 [[package]]
 name = "cvlr-nondet"
 version = "0.3.0"
-source = "git+https://github.com/1arie1/cvlr.git#d516e5fece8d17bb7a07068df648ce796c1d7c88"
 dependencies = [
- "cvlr-asserts",
+ "cvlr-asserts 0.3.0",
+]
+
+[[package]]
+name = "cvlr-nondet"
+version = "0.3.0"
+source = "git+https://github.com/1arie1/cvlr.git#3dc633a2477e58bf2b3e47e82b99b549bc4e0ce8"
+dependencies = [
+ "cvlr-asserts 0.3.0 (git+https://github.com/1arie1/cvlr.git)",
 ]
 
 [[package]]
 name = "cvlr-solana"
 version = "0.3.0"
-source = "git+https://github.com/1arie1/cvlr-solana.git#239858b7e57dab6fa95d82ece7f11f46568fafbf"
 dependencies = [
  "arrayref",
- "cvlr-asserts",
- "cvlr-log",
- "cvlr-mathint",
- "cvlr-nondet",
+ "cvlr-asserts 0.3.0 (git+https://github.com/1arie1/cvlr.git)",
+ "cvlr-log 0.3.0 (git+https://github.com/1arie1/cvlr.git)",
+ "cvlr-mathint 0.3.0 (git+https://github.com/1arie1/cvlr.git)",
+ "cvlr-nondet 0.3.0 (git+https://github.com/1arie1/cvlr.git)",
  "solana-program",
  "spl-token",
  "spl-token-2022",

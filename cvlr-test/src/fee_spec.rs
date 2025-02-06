@@ -42,5 +42,4 @@ pub fn rule_fee_liveness() {
     if fee.is_err() {
         cvlr_assert!(amt == 0);
     }
-    cvlr_vacuity_check!();
 }

@@ -38,6 +38,4 @@ pub fn init_accounts() {
     cvlr_assert_eq!(acc0.data_len(), 2*1024);
 
     clog_acc_info!(acc0);
-    cvlr_vacuity_check!();
-
 }

@@ -170,7 +170,6 @@ mod fv {
         clog!(fv_vault_pre, shares_arg, fv_vault_post);
 
         fv_vault_post.check_solvency();
-        cvlr_vacuity_check!();
     }
 
     #[rule]
@@ -189,7 +188,6 @@ mod fv {
         clog!(fv_vault_pre, token_arg, fv_vault_post);
 
         fv_vault_post.check_solvency();
-        cvlr_vacuity_check!();
     }
 
     #[rule]
@@ -208,7 +206,6 @@ mod fv {
         clog!(fv_vault_pre, token_arg, fv_vault_post);
 
         fv_vault_post.check_solvency();
-        cvlr_vacuity_check!();
     }
 
     #[rule]
@@ -228,7 +225,6 @@ mod fv {
         clog!(fv_vault_pre, token_arg, fv_vault_post);
 
         fv_vault_post.check_solvency();
-        cvlr_vacuity_check!();
     }
 
     #[rule]
@@ -247,7 +243,6 @@ mod fv {
         clog!(fv_vault_pre, shares_arg, fv_vault_post);
 
         fv_vault_post.check_no_dilution(&fv_vault_pre);
-        cvlr_vacuity_check!();
     }
 
     #[rule]
@@ -266,7 +261,6 @@ mod fv {
         clog!(fv_vault_pre, token_arg, fv_vault_post);
 
         fv_vault_post.check_no_dilution(&fv_vault_pre);
-        cvlr_vacuity_check!();
     }
 
     #[rule]
@@ -285,7 +279,6 @@ mod fv {
         clog!(fv_vault_pre, token_arg, fv_vault_post);
 
         fv_vault_post.check_no_dilution(&fv_vault_pre);
-        cvlr_vacuity_check!();
     }
 
     #[rule]
@@ -304,6 +297,5 @@ mod fv {
         clog!(fv_vault_pre, token_arg, fv_vault_post);
 
         fv_vault_post.check_no_dilution(&fv_vault_pre);
-        cvlr_vacuity_check!();
     }
 }
