@@ -6,6 +6,9 @@ export CPATH := env_var_or_default("CPATH", "/Library/Developer/CommandLineTools
 # magic llvm flags
 export RUSTFLAGS := "-C llvm-args=--sbf-expand-memcpy-in-order -C llvm-args=--combiner-store-merging=false -C llvm-args=--combiner-load-merging=false -C llvm-args=--aggressive-instcombine-max-scan-instrs=0 -C llvm-args=--combiner-reduce-load-op-store-width=false -C llvm-args=--combiner-shrink-load-replace-store-with-store=false -C strip=none -C debuginfo=2" + env("EXTRA_RUSTFLAGS", "")
 
+# features used when compiling target Rust code
+export CARGO_FEATURES := env("CARGO_FEATURES", "")
+
 doc:
 	cargo doc --lib -F certora
 test *TESTS:
@@ -15,11 +18,11 @@ test-certora *TESTS:
 
 build-sbf extra_features="":
 	echo "env RUSTFLAGS=$RUSTFLAGS"
-	cargo +solana build-sbf --features certora {{ extra_features }}
+	cargo +solana build-sbf --features certora {{ extra_features }} ${CARGO_FEATURES}
 
 build-sbf-llvm:
 	env RUSTFLAGS="${RUSTFLAGS} --emit=llvm-ir -C no-vectorize-slp -C opt-level=2" \
-	cargo +solana build-sbf --features certora
+	cargo +solana build-sbf --features certora ${CARGO_FEATURES}
 
 build:
 	cargo build
