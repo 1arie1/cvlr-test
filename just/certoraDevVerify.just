@@ -17,7 +17,7 @@ emv_jar := "$CERTORA/emv.jar"
 verify RULE *OPTS: build-sbf make-certora-sbf-env
 		mkdir -p certora_out
 		cd certora_out && ${JAVA} -ea -Xmx8g \
-		-Dtopic.spec -Dlevel.ebpf=${CERTORA_VERBOSE:-info} \
+		-Dtopic.spec -Dlevel.sbf=${CERTORA_VERBOSE:-info} \
 		-Dverbose.times -Dcvt.simple.parallel -Djava.awt.headless=true \
 		-jar {{ emv_jar }} \
 		-deleteSMTFile false -graphDrawLimit 2000 \
@@ -47,7 +47,7 @@ verify RULE *OPTS: build-sbf make-certora-sbf-env
 vacuity RULE *OPTS: (build-sbf "certora-vacuity") make-certora-sbf-env
 		mkdir -p certora_out
 		cd certora_out && ${JAVA} -ea -Xmx8g \
-		-Dtopic.spec -Dlevel.ebpf=${CERTORA_VERBOSE:-info} \
+		-Dtopic.spec -Dlevel.sbf=${CERTORA_VERBOSE:-info} \
 		-Dverbose.times -Dcvt.simple.parallel -Djava.awt.headless=true \
 		-jar {{ emv_jar }} \
 		-deleteSMTFile false -graphDrawLimit 2000 \

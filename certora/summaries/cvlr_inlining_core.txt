@@ -41,7 +41,7 @@
 ; https://github.com/llvm/llvm-project/blob/main/compiler-rt/lib/builtins/README.txt
 ; 
 ; Starting with sbfv2, the code of compiler-rt library is not included in the final ELF file
-; but in ebpf and sbf did so we make sure that we don't inline those functions.
+; but in sbf and sbf did so we make sure that we don't inline those functions.
 ;
 ; Integral bit manipulation
 #[inline(never)] ^__ashldi3$
