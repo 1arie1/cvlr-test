@@ -3,3 +3,4 @@ certora_out
 cvlr_inlining.txt
 cvlr_summaries.txt
 .certora_internal
+.cargo
