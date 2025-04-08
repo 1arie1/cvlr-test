@@ -109,7 +109,7 @@ mod fv {
 
         pub fn check_solvency(&self) {
             let v = self;
-            cvlr_assert!(v.shares_total <= v.token_total);
+            cvlr_assert_le!(v.shares_total, v.token_total);
         }
 
         pub fn check_fixed_rate(&self, old: &FvVaultState) {
