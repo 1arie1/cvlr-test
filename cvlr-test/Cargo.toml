@@ -16,3 +16,11 @@ rt = ["cvlr/rt", "cvlr-fixed/rt"]
 [dependencies]
 cvlr = { workspace = true }
 cvlr-fixed = { workspace = true }
+
+[package.metadata.certora]
+sources = [
+    "src/**/*.rs",
+    "Cargo.toml",
+]
+solana_inlining = "certora/cvlr_inlining.txt"
+solana_summaries = "certora/cvlr_summaries.txt"
