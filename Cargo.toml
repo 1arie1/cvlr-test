@@ -22,7 +22,7 @@ proc-macro2 = "1"
 quote = "1"
 syn = "2"
 
-cvlr = { git = "https://github.com/Certora/cvlr.git" }
-cvlr-fixed = { git = "https://github.com/Certora/cvlr.git" } 
-cvlr-solana = { git = "https://github.com/Certora/cvlr-solana.git" }
+cvlr =  "0.4.0"
+cvlr-fixed = "0.4.0"
+cvlr-solana = "0.4.0"
 
