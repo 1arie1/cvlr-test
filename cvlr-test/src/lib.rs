@@ -7,4 +7,5 @@ mod transfer_fee;
 mod log;
 mod some_fee;
 mod very_simple_fee;
+mod inflation;
 pub mod certora;
