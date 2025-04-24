@@ -1,6 +1,6 @@
 use solana_program::account_info::{AccountInfo, next_account_info};
 use cvlr::prelude::*;
-use cvlr_solana::{clog_acc_info, cvlr_deserialize_nondet_accounts};
+use cvlr_solana::{clog_acc_info, cvlr_deserialize_nondet_accounts, cvlr_new_account_info};
 
 #[rule]
 pub fn clone_accounts() {
@@ -38,4 +38,12 @@ pub fn init_accounts() {
     cvlr_assert_eq!(acc0.data_len(), 2*1024);
 
     clog_acc_info!(acc0);
+}
+
+#[rule]
+pub fn account_info_bounds() {
+    let acc_info = cvlr_new_account_info();
+
+    cvlr_assert!(cvlr::is_u64(acc_info.lamports()));
+    cvlr_assert!(cvlr::is_u64(acc_info.rent_epoch));
 }
