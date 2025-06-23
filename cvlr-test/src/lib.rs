@@ -9,3 +9,4 @@ mod some_fee;
 mod very_simple_fee;
 mod inflation;
 pub mod certora;
+mod arithmetic;
